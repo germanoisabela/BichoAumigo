@@ -1,92 +1,47 @@
-import React from 'react';
-
-export function Header() {
+export function Header({ search, onSearchChange, onHome, onSignOut, onOrganizations }) {
   return (
-    <header style={{ backgroundColor: '#FFF6DF', width: '100%', paddingBottom: '15px' }}>
-      {/* 1. Barra Superior (Logo, Pesquisa, Login, Favoritos) */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '12px 24px',
-        maxWidth: '1200px',
-        margin: '0 auto'
-      }}>
-        {/* Logotipo */}
-        <div style={{ fontWeight: 'bold', fontSize: '20px', color: '#000' }}>
-          🐾 BichoAumigo
-        </div>
+    <header className="site-header">
+      <div className="header-top">
+        <a className="brand" href="#top" onClick={onHome} aria-label="BichoAumigo, início">
+          <span className="brand-mark" aria-hidden="true">🐾</span>
+          <span>Bicho<span>Aumigo</span></span>
+        </a>
 
-        {/* Campo de Pesquisa */}
-        <div style={{ flex: 1, maxWidth: '300px', margin: '0 20px' }}>
+        <label className="header-search">
+          <span className="visually-hidden">Buscar pets</span>
           <input
-            type="text"
-            placeholder="Pesquise aqui..."
-            style={{
-              width: '100%',
-              padding: '6px 12px',
-              borderRadius: '20px',
-              border: '1px solid #E0E0E0',
-              outline: 'none',
-              fontSize: '12px'
-            }}
+            type="search"
+            placeholder="Buscar um pet"
+            value={search}
+            onChange={(event) => onSearchChange(event.target.value)}
           />
-        </div>
+          <span aria-hidden="true">⌕</span>
+        </label>
 
-        {/* Ações de Usuário */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '15px', fontSize: '12px' }}>
-          <button style={{
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '4px'
-          }}>
-            👤 Login or sign in
+        <div className="header-actions">
+          <button type="button" className="login-button" onClick={onSignOut} aria-label="Sair da conta" title="Sair da conta">
+            <span aria-hidden="true">↪</span> Sair
           </button>
-          <span style={{ cursor: 'pointer', fontSize: '16px' }}>❤️</span>
+          <button type="button" className="favorite-button" aria-label="Favoritos">♥</button>
         </div>
       </div>
 
-      {/* 2. Links de Navegação Principal */}
-      <nav style={{
-        display: 'flex',
-        justifyContent: 'center',
-        gap: '24px',
-        padding: '8px 0',
-        fontSize: '13px',
-        fontWeight: '500'
-      }}>
-        <a href="#institutional" style={{ color: '#333', textDecoration: 'none' }}>Instituições</a>
-        <a href="#ongs" style={{ color: '#333', textDecoration: 'none' }}>ONGs</a>
-        <a href="#social-projects" style={{ color: '#333', textDecoration: 'none' }}>Projetos Sociais</a>
-        <a href="#want-to-adopt" style={{ color: '#333', textDecoration: 'none' }}>Quer Adotar</a>
-        <a href="#become-partner" style={{ color: '#333', textDecoration: 'none' }}>Torne-se Nosso Parceiro</a>
+      <nav className="main-nav" aria-label="Navegação principal">
+        <a href="#top" onClick={onHome}>Início</a>
+        <a href="#pets" onClick={onHome}>Animais</a>
+        <a
+          href="#instituicoes"
+          onClick={(event) => {
+            event.preventDefault();
+            onOrganizations();
+          }}
+        >
+          ONGs
+        </a>
+        <a href="#duvidas">Dúvidas</a>
+        <a href="#pets" className="nav-cta">Quero adotar</a>
+        <a href="#cadastro" className="nav-cta nav-cta-filled">Cadastrar animal</a>
       </nav>
-
-      {/* 3. Botões de Acesso Rápido (Pílulas amarelas) */}
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        gap: '12px',
-        marginTop: '10px'
-      }}>
-        <button style={pillButtonStyle}>Loja Pet</button>
-        <button style={{ ...pillButtonStyle, backgroundColor: '#EAA937', color: '#FFF' }}>para preencher</button>
-        <button style={pillButtonStyle}>para preencher</button>
-      </div>
     </header>
   );
 }
-
-// Estilo reutilizável para as pílulas inferiores
-const pillButtonStyle = {
-  backgroundColor: '#FFF',
-  border: '1px solid #EAA937',
-  borderRadius: '20px',
-  padding: '6px 16px',
-  fontSize: '12px',
-  fontWeight: 'bold',
-  cursor: 'pointer'
-};
