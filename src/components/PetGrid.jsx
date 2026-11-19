@@ -1,10 +1,10 @@
 import { PetCard } from './PetCard';
 
-export function PetGrid({ pets, onSelectPet }) {
+export function PetGrid({ pets }) {
   return (
     <div className="pet-grid">
       {pets.map((pet) => (
-        <PetCard key={pet.id} pet={pet} onSelect={() => onSelectPet(pet)} />
+        <PetCard key={pet.id} pet={pet} />
       ))}
     </div>
   );

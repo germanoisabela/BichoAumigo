@@ -1,3 +1,4 @@
+// Detalhes de cada animal de exemplo (idade, porte, saúde, fotos...), indexados pelo id do animal.
 const dogPhotos = [
   'https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=900&q=85',
   'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=900&q=85',
@@ -17,40 +18,7 @@ const birdPhotos = [
   'https://images.unsplash.com/photo-1555169062-013468b47731?auto=format&fit=crop&w=900&q=85',
 ];
 
-const owners = {
-  roberto: {
-    id: 'roberto-alves',
-    type: 'user',
-    name: 'Roberto Alves',
-    description: 'Protetor independente',
-    location: 'Rio de Janeiro, RJ',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=85',
-    about: 'Ajudo animais encontrados em situação de vulnerabilidade a receber cuidados e encontrar uma família preparada. Cada pet anunciado fica comigo temporariamente até encontrar um lar responsável.',
-    whatsappNumber: '',
-  },
-  colheita: {
-    id: 'ong-colheita-de-amor',
-    type: 'organization',
-    name: 'ONG Colheita de Amor',
-    description: 'Organização de proteção animal',
-    location: 'Piedade, SP',
-    image: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=900&q=85',
-    about: 'Somos uma organização dedicada ao acolhimento, cuidado veterinário e encaminhamento responsável de animais resgatados. Acompanhamos cada adoção para apoiar a adaptação do pet à nova família.',
-    whatsappNumber: '',
-  },
-  patasAmigas: {
-    id: 'ong-patas-amigas',
-    type: 'organization',
-    name: 'ONG Patas Amigas',
-    description: 'Organização de proteção animal',
-    location: 'São Paulo, SP',
-    image: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=900&q=85',
-    about: 'A ONG Patas Amigas trabalha pelo bem-estar dos animais, conectando pets resgatados a pessoas interessadas em oferecer um lar seguro e afetuoso.',
-    whatsappNumber: '',
-  },
-};
-
-const profiles = {
+export const petProfiles = {
   1: { age: '3 anos', breed: 'Golden retriever', size: 'Grande', health: 'Vacinado e vermifugado', temperament: 'Carinhoso, brincalhão e sociável', care: 'Gosta de passeios e precisa de espaço para brincar.', gallery: dogPhotos },
   2: { age: '2 anos', breed: 'Sem raça definida', size: 'Médio', health: 'Saudável, vacinado e vermifugado', temperament: 'Dócil, companheiro e curioso', care: 'Precisa de passeios diários e adaptação gradual.', gallery: dogPhotos },
   3: { age: '1 ano', breed: 'Sem raça definida', size: 'Pequeno', health: 'Vacinado e castrado', temperament: 'Tranquilo e carinhoso', care: 'Gosta de ambientes seguros e enriquecidos.', gallery: catPhotos },
@@ -64,25 +32,3 @@ const profiles = {
   11: { age: '2 anos', breed: 'Sem raça definida', size: 'Médio', health: 'Vacinada e vermifugada', temperament: 'Brincalhona e carinhosa', care: 'Precisa de passeios e convivência com a família.', gallery: dogPhotos },
   12: { age: '1 ano', breed: 'Calopsita', size: 'Pequeno', health: 'Avaliada por veterinário', temperament: 'Curiosa e ativa', care: 'Precisa de ambiente seguro, rotina e estímulos.', gallery: birdPhotos },
 };
-
-export function getPetProfile(pet) {
-  const profile = profiles[pet.id] ?? {};
-  const owner = Object.values(owners).find((candidate) => candidate.id === pet.ownerId) ?? owners.patasAmigas;
-
-  return {
-    ...profile,
-    owner,
-  };
-}
-
-export function getOwnerById(ownerId) {
-  return Object.values(owners).find((owner) => owner.id === ownerId) ?? owners.patasAmigas;
-}
-
-export function getAllOwners() {
-  return Object.values(owners);
-}
-
-export function getOwnerPets(ownerId, pets) {
-  return pets.filter((pet) => (pet.ownerId ?? owners.patasAmigas.id) === ownerId);
-}

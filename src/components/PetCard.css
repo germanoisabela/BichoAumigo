@@ -1,0 +1,159 @@
+.pet-grid {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 16px;
+}
+
+.pet-card {
+	position: relative;
+	min-width: 0;
+	overflow: hidden;
+	border: 1px solid #e4b85e;
+	border-radius: 6px;
+	background: #ffd17a;
+	box-shadow: 0 2px 5px rgba(75, 52, 23, 0.08);
+	transition: box-shadow 180ms ease, transform 180ms ease;
+}
+
+.pet-card-open {
+	width: 100%;
+	display: block;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	color: inherit;
+	font: inherit;
+	text-align: left;
+	cursor: pointer;
+}
+
+.pet-card:hover {
+	box-shadow: 0 8px 18px rgba(75, 52, 23, 0.15);
+	transform: translateY(-3px);
+}
+
+.pet-photo-wrap {
+	position: relative;
+	margin: 7px 7px 0;
+	overflow: hidden;
+	aspect-ratio: 1 / 1.08;
+	border-radius: 5px;
+	background: #d7d1c1;
+}
+
+.pet-photo {
+	width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: cover;
+	transition: transform 220ms ease;
+}
+
+.pet-card:hover .pet-photo {
+	transform: scale(1.035);
+}
+
+.pet-status {
+	position: absolute;
+	bottom: 7px;
+	left: 7px;
+	max-width: calc(100% - 14px);
+	overflow: hidden;
+	padding: 4px 7px;
+	border-radius: 12px;
+	background: rgba(255, 253, 247, 0.94);
+	color: var(--color-teal);
+	font-size: 9px;
+	font-weight: 700;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.status-other {
+	color: #8a581e;
+}
+
+.pet-favorite {
+	position: absolute;
+	top: 7px;
+	right: 7px;
+	width: 29px;
+	height: 29px;
+	display: grid;
+	place-items: center;
+	border: 0;
+	border-radius: 50%;
+	background: rgba(255, 253, 247, 0.92);
+	color: #a74b37;
+	font-size: 20px;
+	cursor: pointer;
+	z-index: 1;
+}
+
+.pet-card-info {
+	min-height: 47px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	padding: 6px 10px 8px;
+}
+
+.pet-card-info h3 {
+	overflow: hidden;
+	margin: 0;
+	color: #382e20;
+	font-family: var(--font-heading);
+	font-size: 14px;
+	font-weight: 900;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.pet-card-info p {
+	margin: 1px 0 0;
+	color: #715c3c;
+	font-size: 10px;
+}
+
+.pet-card-arrow {
+	flex: 0 0 auto;
+	color: #704820;
+	font-size: 17px;
+}
+
+@media (min-width: 900px) {
+	.pet-grid {
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+		
+	}
+}
+
+@media (max-width: 700px) {
+	.pet-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 10px;
+		
+	}
+
+	.pet-photo-wrap {
+			aspect-ratio: 1 / 0.9;
+		
+	}
+
+	.pet-card-info {
+			min-height: 40px;
+			padding: 5px 8px 7px;
+		
+	}
+
+	.pet-card-info h3 {
+			font-size: 12px;
+		
+	}
+}
+
+/* O card agora é um link (<a>) do React Router */
+.pet-card-open {
+	text-decoration: none;
+}

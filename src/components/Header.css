@@ -1,0 +1,241 @@
+.site-header {
+	position: relative;
+	z-index: 1;
+	background: #fff6df;
+	border-bottom: 3px solid var(--color-orange);
+}
+
+.header-top,
+.main-nav {
+	width: var(--content-width);
+	margin: 0 auto;
+}
+
+.header-top {
+	min-height: 68px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 28px;
+}
+
+.brand {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	text-decoration: none;
+	white-space: nowrap;
+	font-family: var(--font-heading);
+	font-size: 21px;
+	font-weight: 900;
+}
+
+.brand > span:last-child > span {
+	color: var(--color-orange-dark);
+}
+
+.brand-mark {
+	color: var(--color-orange-dark);
+	font-size: 22px;
+}
+
+.header-search {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+	border: 1px solid #e6d9c0;
+	background: white;
+	color: var(--color-muted);
+}
+
+.header-search {
+	width: min(300px, 35vw);
+	height: 36px;
+	padding: 0 12px;
+	border-radius: 20px;
+}
+
+.header-search input {
+	width: 100%;
+	min-width: 0;
+	border: 0;
+	outline: 0;
+	background: transparent;
+	color: var(--color-ink);
+	font-size: 12px;
+}
+
+.header-search > span:last-child {
+	font-size: 22px;
+	line-height: 1;
+}
+
+.header-actions {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+}
+
+.login-button,
+.favorite-button {
+	border: 0;
+	background: transparent;
+	cursor: pointer;
+}
+
+.login-button {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 13px;
+	font-weight: 700;
+}
+
+.favorite-button {
+	padding: 4px;
+	color: var(--color-ink);
+	font-size: 22px;
+}
+
+.main-nav {
+	min-height: 43px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	border-top: 1px solid rgba(185, 93, 32, 0.12);
+}
+
+.main-nav a {
+	text-decoration: none;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.main-nav a:not(.nav-cta):hover {
+	color: var(--color-orange-dark);
+}
+
+.main-nav .nav-cta {
+	padding: 8px 15px;
+	border: 1px solid var(--color-orange);
+	border-radius: 18px;
+	color: #754515;
+}
+
+.main-nav .nav-cta-filled {
+	border-color: var(--color-orange);
+	background: var(--color-orange);
+	color: white;
+}
+
+@media (max-width: 700px) {
+	.header-top,
+	.main-nav {
+			width: var(--content-width-mobile);
+		
+	}
+
+	.header-top {
+			min-height: 58px;
+			gap: 10px;
+		
+	}
+
+	.brand {
+			gap: 5px;
+			font-size: 16px;
+		
+	}
+
+	.brand-mark {
+			font-size: 18px;
+		
+	}
+
+	.header-search {
+			width: auto;
+			flex: 1;
+			height: 32px;
+			padding: 0 9px;
+		
+	}
+
+	.header-search input {
+			font-size: 11px;
+		
+	}
+
+	.header-actions {
+			gap: 5px;
+		
+	}
+
+	.login-button {
+			width: 31px;
+			height: 31px;
+			justify-content: center;
+			overflow: hidden;
+			font-size: 0;
+		
+	}
+
+	.login-button span {
+			font-size: 17px;
+		
+	}
+
+	.favorite-button {
+			font-size: 19px;
+		
+	}
+
+	.main-nav {
+			min-height: 39px;
+			justify-content: flex-start;
+			gap: 14px;
+			overflow-x: auto;
+			scrollbar-width: none;
+		
+	}
+
+	.main-nav::-webkit-scrollbar {
+			display: none;
+		
+	}
+
+	.main-nav a {
+			flex: 0 0 auto;
+			font-size: 10px;
+		
+	}
+
+	.main-nav .nav-cta {
+			padding: 6px 10px;
+		
+	}
+}
+
+@media (max-width: 380px) {
+	.header-top,
+	.main-nav {
+			width: calc(100% - 20px);
+		
+	}
+
+	.brand {
+			font-size: 14px;
+		
+	}
+
+	.header-search {
+			max-width: 105px;
+		
+	}
+}
+
+/* Os botões do cabeçalho agora são links (<a>) do React Router */
+.login-button,
+.favorite-button {
+	text-decoration: none;
+}

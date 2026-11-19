@@ -1,10 +1,13 @@
+import { buildWhatsAppUrl } from '../utils/phone';
+import { EmptyState } from './EmptyState';
 import { PetGrid } from './PetGrid';
+import './OwnerProfile.css';
 
-export function OwnerProfile({ owner, pets, onBack, onSelectPet }) {
-  const message = encodeURIComponent(`Olá! Gostaria de saber mais sobre os animais do perfil de ${owner.name}.`);
-  const whatsappUrl = owner.whatsappNumber
-    ? `https://wa.me/${owner.whatsappNumber}?text=${message}`
-    : `https://wa.me/?text=${message}`;
+export function OwnerProfile({ owner, pets, onBack }) {
+  const whatsappUrl = buildWhatsAppUrl(
+    owner.whatsappNumber,
+    `Olá! Gostaria de saber mais sobre os animais do perfil de ${owner.name}.`,
+  );
   const isOrganization = owner.type === 'organization';
 
   return (
@@ -42,9 +45,9 @@ export function OwnerProfile({ owner, pets, onBack, onSelectPet }) {
           <span className="pet-count">{pets.length} {pets.length === 1 ? 'pet' : 'pets'}</span>
         </div>
         {pets.length > 0 ? (
-          <PetGrid pets={pets} onSelectPet={onSelectPet} />
+          <PetGrid pets={pets} />
         ) : (
-          <p className="empty-state">Este perfil ainda não tem pets publicados.</p>
+          <EmptyState>Este perfil ainda não tem pets publicados.</EmptyState>
         )}
       </section>
 

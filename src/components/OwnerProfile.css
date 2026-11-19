@@ -1,0 +1,152 @@
+.owner-profile {
+	width: var(--content-width);
+	margin: 0 auto;
+	padding: 20px 0 52px;
+}
+
+.owner-intro {
+	display: grid;
+	grid-template-columns: minmax(240px, 0.72fr) minmax(0, 1.28fr);
+	align-items: center;
+	gap: clamp(24px, 5vw, 58px);
+	padding: 12px 0 30px;
+}
+
+.owner-photo-wrap {
+	max-width: 360px;
+	width: 100%;
+	justify-self: center;
+	padding: 8px;
+	border-radius: 12px;
+	background: #e8e4dc;
+}
+
+.owner-photo {
+	width: 100%;
+	display: block;
+	aspect-ratio: 1 / 1.08;
+	border-radius: 8px;
+	background: #e9c77e;
+	object-fit: cover;
+}
+
+.owner-summary {
+	max-width: 650px;
+}
+
+.owner-title-row {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 11px;
+}
+
+.owner-title-row h1 {
+	margin: 0;
+	font-family: var(--font-heading);
+	font-size: 32px;
+	font-weight: 900;
+}
+
+.owner-type-badge {
+	padding: 6px 10px;
+	border-radius: 18px;
+	background: #e7f0eb;
+	color: var(--color-teal);
+	font-size: 10px;
+	font-weight: 700;
+}
+
+.owner-location {
+	margin: 6px 0 14px;
+	color: var(--color-muted);
+	font-size: 11px;
+}
+
+.owner-description {
+	margin: 0;
+	color: #5e574c;
+	font-size: 12px;
+	line-height: 1.65;
+}
+
+.owner-facts {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 12px 18px;
+	margin: 20px 0 0;
+}
+
+.owner-facts > div {
+	padding-bottom: 8px;
+	border-bottom: 1px solid var(--color-line);
+}
+
+.owner-facts dt {
+	margin-bottom: 3px;
+	color: var(--color-muted);
+	font-size: 9px;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+.owner-facts dd {
+	margin: 0;
+	color: #40382f;
+	font-size: 11px;
+}
+
+.owner-pets {
+	padding-top: 21px;
+	border-top: 1px solid var(--color-line);
+}
+
+.owner-contact {
+	margin-top: 30px;
+}
+
+@media (max-width: 700px) {
+	.owner-profile {
+			width: var(--content-width-mobile);
+			padding-top: 13px;
+		
+	}
+
+	.owner-intro {
+			grid-template-columns: 1fr;
+			gap: 20px;
+			padding: 5px 0 22px;
+		
+	}
+
+	.owner-photo-wrap {
+			max-width: 440px;
+		
+	}
+
+	.owner-photo {
+			aspect-ratio: 1 / 0.82;
+		
+	}
+
+	.owner-title-row h1 {
+			font-size: 27px;
+		
+	}
+
+	.owner-facts {
+			gap: 10px 12px;
+			margin-top: 16px;
+		
+	}
+
+	.owner-pets {
+			padding-top: 17px;
+		
+	}
+
+	.owner-contact {
+			margin-top: 20px;
+		
+	}
+}

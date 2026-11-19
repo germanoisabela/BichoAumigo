@@ -1,12 +1,15 @@
 import { useState } from 'react';
+import { Link } from 'react-router';
+import { buildWhatsAppUrl } from '../utils/phone';
+import './PetProfile.css';
 
-export function PetProfile({ pet, onBack, onOpenOwner }) {
+export function PetProfile({ pet, onBack }) {
   const [activePhoto, setActivePhoto] = useState(0);
   const photos = [pet.image, ...pet.gallery.filter((photo) => photo !== pet.image)];
-  const contactMessage = encodeURIComponent(`Olá! Tenho interesse em conhecer ${pet.name} para adoção. Poderia me passar mais informações?`);
-  const contactUrl = pet.owner.whatsappNumber
-    ? `https://wa.me/${pet.owner.whatsappNumber}?text=${contactMessage}`
-    : `https://wa.me/?text=${contactMessage}`;
+  const contactUrl = buildWhatsAppUrl(
+    pet.owner.whatsappNumber,
+    `Olá! Tenho interesse em conhecer ${pet.name} para adoção. Poderia me passar mais informações?`,
+  );
 
   return (
     <main className="profile-page">
@@ -48,9 +51,9 @@ export function PetProfile({ pet, onBack, onOpenOwner }) {
               <div>
                 <dt>Responsável</dt>
                 <dd>
-                  <button className="owner-profile-link" type="button" onClick={() => onOpenOwner(pet.owner)}>
+                  <Link className="owner-profile-link" to={`/responsavel/${pet.owner.id}`}>
                     {pet.owner.name} <span aria-hidden="true">↗</span>
-                  </button>
+                  </Link>
                 </dd>
               </div>
             </dl>

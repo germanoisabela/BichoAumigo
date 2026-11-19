@@ -1,0 +1,23 @@
+/* Variáveis globais do tema. Para mudar uma cor do site, mude aqui. */
+:root {
+	/* Cores */
+	--color-ink: #30291f;
+	--color-ink-soft: #51493f;
+	--color-ink-dark: #352b20;
+	--color-muted: #81796c;
+	--color-orange: #ec9f25;
+	--color-orange-dark: #b95d20;
+	--color-amber: #f3b84e;
+	--color-cream: #fff4d8;
+	--color-paper: #fffdf7;
+	--color-line: #eee5d4;
+	--color-teal: #316a61;
+
+	/* Fontes (carregadas pelo <link> do index.html) */
+	--font-body: 'DM Sans', sans-serif;
+	--font-heading: 'Nunito', sans-serif;
+
+	/* Largura do conteúdo principal */
+	--content-width: min(1120px, calc(100% - 48px));
+	--content-width-mobile: min(100% - 28px, 560px);
+}
