@@ -49,6 +49,15 @@
 	transition: transform 220ms ease;
 }
 
+.pet-photo-placeholder {
+	display: grid;
+	place-items: center;
+	padding: 12px;
+	color: #715c3c;
+	font-size: 11px;
+	text-align: center;
+}
+
 .pet-card:hover .pet-photo {
 	transform: scale(1.035);
 }

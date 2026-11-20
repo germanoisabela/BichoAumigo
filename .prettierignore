@@ -2,3 +2,6 @@ node_modules
 dist
 package-lock.json
 public
+coverage
+.env
+.env.*

@@ -14,7 +14,12 @@ export function Profile() {
   const { data: pets, loading, error } = useAsyncData(listPetsByOwner, currentUser.id);
 
   if (loading) return <Loading label="Carregando seu perfil..." />;
-  if (error) return <ErrorMessage message="Não foi possível carregar seu perfil. Tente novamente em instantes." />;
+  if (error) {
+    const message = error.message.includes('perfil de demonstração')
+      ? error.message
+      : 'Não foi possível carregar seu perfil. Tente novamente em instantes.';
+    return <ErrorMessage message={message} />;
+  }
 
   return <OwnerProfile owner={currentUser} pets={pets} onBack={goBack} />;
 }

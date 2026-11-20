@@ -30,6 +30,15 @@
 	object-fit: cover;
 }
 
+.owner-photo-placeholder {
+	display: grid;
+	place-items: center;
+	padding: 18px;
+	color: #715c3c;
+	font-size: 12px;
+	text-align: center;
+}
+
 .owner-summary {
 	max-width: 650px;
 }

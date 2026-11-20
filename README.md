@@ -9,9 +9,9 @@ pessoas que querem adotar.
 
 ## Situação atual
 
-O projeto é um **protótipo de front-end**: as telas funcionam, mas os dados (animais, responsáveis
-e login) são **de exemplo** e ficam dentro do código. Ainda não há banco de dados nem login real.
-Essa parte entra em etapas futuras.
+Os serviços do catálogo e dos perfis de animais/responsáveis estão conectados ao Supabase. Para
+exibir conteúdo, ainda é necessário executar o script de configuração e importar os registros
+reais. O login continua demonstrativo; favoritos e cadastro de animais ainda não gravam no banco.
 
 ## Tecnologias
 
@@ -27,6 +27,20 @@ Pré-requisito: [Node.js](https://nodejs.org) instalado.
 npm install        # instala as dependências (só na primeira vez)
 npm run dev        # abre o site em modo de desenvolvimento (endereço mostrado no terminal)
 ```
+
+### Configurar o Supabase
+
+1. Copie `.env.example` para `.env` e preencha `VITE_SUPABASE_URL` e
+   `VITE_SUPABASE_PUBLISHABLE_KEY` com os valores do projeto Supabase. O `.env` não deve ser
+   enviado ao Git.
+2. No Supabase, abra **SQL Editor**, execute [`supabase/setup.sql`](./supabase/setup.sql) e
+   importe os registros reais de usuários, espécies, raças, pets e fotos. O script cria tabelas
+   que estiverem faltando, ativa RLS e cria a view pública usada pelo catálogo.
+3. Reinicie `npm run dev` depois de alterar o `.env`.
+
+O catálogo ficará vazio até haver registros de pets relacionados a usuários, espécies e fotos.
+As políticas de escrita de pets exigem que o usuário esteja autenticado pelo Supabase e vinculado
+à coluna `usuarios.auth_user_id`; o login atual ainda é de demonstração.
 
 Outros comandos:
 
@@ -46,8 +60,7 @@ src/
 ├── App.jsx           Mapa de rotas (endereço → página)
 ├── pages/            Uma página por rota (Home, Login, Register, PetDetails...)
 ├── components/       Peças reutilizáveis (Header, PetCard, PetGrid, Loading...)
-├── services/         Acesso aos dados. HOJE devolvem dados de exemplo; quando o banco
-│                     estiver pronto, só o conteúdo destes arquivos muda
+├── services/         Acesso aos dados da aplicação e integração com Supabase
 ├── context/          Dados compartilhados por todo o site (quem está logado)
 ├── hooks/            Funções reutilizáveis do React (useAuth, useAsyncData, useGoBack)
 ├── utils/            Funções simples e sem tela (telefone, regras de senha)

@@ -6,7 +6,13 @@ export function PetCard({ pet }) {
     <article className="pet-card">
       <Link className="pet-card-open" to={`/animais/${pet.id}`} aria-label={`Ver perfil de ${pet.name}`}>
         <div className="pet-photo-wrap">
-          <img className="pet-photo" src={pet.image} alt={pet.name} loading="lazy" />
+          {pet.image ? (
+            <img className="pet-photo" src={pet.image} alt={pet.name} loading="lazy" />
+          ) : (
+            <div className="pet-photo pet-photo-placeholder" role="img" aria-label={`Foto de ${pet.name} não disponível`}>
+              Foto não disponível
+            </div>
+          )}
           <span className={`pet-status${pet.status === 'Disponível' ? ' status-available' : ' status-other'}`}>
             {pet.status}
           </span>

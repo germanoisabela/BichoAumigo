@@ -18,7 +18,13 @@ export function OwnerProfile({ owner, pets, onBack }) {
 
       <section className="owner-intro" aria-labelledby="owner-name">
         <div className="owner-photo-wrap">
-          <img className="owner-photo" src={owner.image} alt={owner.name} />
+          {owner.image ? (
+            <img className="owner-photo" src={owner.image} alt={owner.name} />
+          ) : (
+            <div className="owner-photo owner-photo-placeholder" role="img" aria-label={`Foto de ${owner.name} não disponível`}>
+              Foto não disponível
+            </div>
+          )}
         </div>
         <div className="owner-summary">
           <p className="section-eyebrow">{isOrganization ? 'Instituição de proteção animal' : 'Comunidade BichoAumigo'}</p>

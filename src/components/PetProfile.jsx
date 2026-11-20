@@ -5,7 +5,8 @@ import './PetProfile.css';
 
 export function PetProfile({ pet, onBack }) {
   const [activePhoto, setActivePhoto] = useState(0);
-  const photos = [pet.image, ...pet.gallery.filter((photo) => photo !== pet.image)];
+  const photos = [...new Set([pet.image, ...(pet.gallery ?? [])].filter(Boolean))];
+  const currentPhoto = photos[activePhoto] ?? photos[0];
   const contactUrl = buildWhatsAppUrl(
     pet.owner.whatsappNumber,
     `Olá! Tenho interesse em conhecer ${pet.name} para adoção. Poderia me passar mais informações?`,
@@ -19,9 +20,13 @@ export function PetProfile({ pet, onBack }) {
 
       <section className="profile-intro" aria-labelledby="profile-name">
         <div className="profile-cover">
-          <img className="profile-main-photo" src={photos[activePhoto]} alt={`${pet.name}, foto ${activePhoto + 1}`} />
+          {currentPhoto ? (
+            <img className="profile-main-photo" src={currentPhoto} alt={`${pet.name}, foto ${activePhoto + 1}`} />
+          ) : (
+            <div className="profile-main-photo profile-photo-placeholder">Foto não disponível</div>
+          )}
           <button className="profile-heart" type="button" aria-label={`Adicionar ${pet.name} aos favoritos`}>♡</button>
-          <span className="profile-photo-count">{activePhoto + 1} / {photos.length}</span>
+          {photos.length > 0 && <span className="profile-photo-count">{activePhoto + 1} / {photos.length}</span>}
         </div>
 
         <div className="profile-summary">
@@ -36,18 +41,19 @@ export function PetProfile({ pet, onBack }) {
 
           <section className="profile-about">
             <h2>Sobre {pet.name}</h2>
-            <p>{pet.name} é um animal especial, com muito carinho para oferecer. {pet.temperament}. A pessoa ou instituição responsável pode contar mais sobre sua história e ajudar a família a se preparar para uma adoção consciente.</p>
+            <p>
+              {pet.description ||
+                `${pet.name} está aguardando uma família preparada. Converse com a pessoa ou instituição responsável para saber mais sobre sua história e seus cuidados.`}
+            </p>
           </section>
 
           <section className="profile-facts">
             <h2>Informações</h2>
             <dl>
-              <div><dt>Idade</dt><dd>{pet.age}</dd></div>
-              <div><dt>Porte</dt><dd>{pet.size}</dd></div>
-              <div><dt>Raça</dt><dd>{pet.breed}</dd></div>
-              <div><dt>Saúde</dt><dd>{pet.health}</dd></div>
-              <div><dt>Personalidade</dt><dd>{pet.temperament}</dd></div>
-              <div><dt>Cuidados</dt><dd>{pet.care}</dd></div>
+              {pet.age && <div><dt>Idade aproximada</dt><dd>{pet.age}</dd></div>}
+              {pet.sex && <div><dt>Sexo</dt><dd>{pet.sex}</dd></div>}
+              {pet.size && <div><dt>Porte</dt><dd>{pet.size}</dd></div>}
+              {pet.breed && <div><dt>Raça</dt><dd>{pet.breed}</dd></div>}
               <div>
                 <dt>Responsável</dt>
                 <dd>
@@ -58,7 +64,7 @@ export function PetProfile({ pet, onBack }) {
               </div>
             </dl>
           </section>
-          <p className="profile-demo-note">Perfil demonstrativo. Confirme as informações com a ONG responsável.</p>
+          <p className="profile-demo-note">As informações são fornecidas pelo responsável; confirme os detalhes antes da adoção.</p>
         </div>
       </section>
 
@@ -68,23 +74,26 @@ export function PetProfile({ pet, onBack }) {
             <p className="section-eyebrow">Um pouco mais de perto</p>
             <h2 id="gallery-title">Fotos de {pet.name}</h2>
           </div>
-          <span>{photos.length} fotos</span>
+          <span>{photos.length} {photos.length === 1 ? 'foto' : 'fotos'}</span>
         </div>
-        <div className="profile-photo-grid">
-          {photos.map((photo, index) => (
-            <button
-              className={`profile-photo-button${activePhoto === index ? ' is-active' : ''}`}
-              key={`${pet.id}-${photo}`}
-              type="button"
-              aria-label={`Ver foto ${index + 1} de ${pet.name}`}
-              aria-pressed={activePhoto === index}
-              onClick={() => setActivePhoto(index)}
-            >
-              <img src={photo} alt={`${pet.name}, foto ${index + 1}`} loading="lazy" />
-            </button>
-          ))}
-        </div>
-        <p className="gallery-demo-note">As imagens da galeria são exemplos e devem ser substituídas pelas fotos do animal.</p>
+        {photos.length > 0 ? (
+          <div className="profile-photo-grid">
+            {photos.map((photo, index) => (
+              <button
+                className={`profile-photo-button${activePhoto === index ? ' is-active' : ''}`}
+                key={`${pet.id}-${photo}`}
+                type="button"
+                aria-label={`Ver foto ${index + 1} de ${pet.name}`}
+                aria-pressed={activePhoto === index}
+                onClick={() => setActivePhoto(index)}
+              >
+                <img src={photo} alt={`${pet.name}, foto ${index + 1}`} loading="lazy" />
+              </button>
+            ))}
+          </div>
+        ) : (
+          <p className="gallery-demo-note">O responsável ainda não adicionou fotos para este animal.</p>
+        )}
       </section>
 
       <section className="profile-contact" id="contato-ong" aria-labelledby="contact-title">

@@ -1,6 +1,5 @@
 import { DEFAULT_OWNER_ID, owners } from '../data/owners';
-import { pets } from '../data/pets';
-import { respond } from './mockApi';
+import { listPetsByOwner } from './petsService';
 
 // Procura um responsável (pessoa ou ONG) pelo id. Devolve `null` se não existir.
 export function findOwner(ownerId) {
@@ -13,10 +12,9 @@ export function findPetOwner(pet) {
 }
 
 // Retorna `{ owner, pets }` com o responsável e os animais anunciados por ele, ou `null`.
-export function getOwnerWithPets(ownerId) {
-  const owner = findOwner(ownerId);
-  if (!owner) return respond(null);
+export async function getOwnerWithPets(ownerId) {
+  const ownerPets = await listPetsByOwner(ownerId);
+  if (ownerPets.length === 0) return null;
 
-  const ownerPets = pets.filter((pet) => (pet.ownerId ?? DEFAULT_OWNER_ID) === owner.id);
-  return respond({ owner, pets: ownerPets });
+  return { owner: ownerPets[0].owner, pets: ownerPets };
 }
