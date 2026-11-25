@@ -30,13 +30,14 @@ npm run dev        # abre o site em modo de desenvolvimento (endereço mostrado 
 
 ### Configurar o Supabase
 
-1. Copie `.env.example` para `.env` e preencha `VITE_SUPABASE_URL` e
-   `VITE_SUPABASE_PUBLISHABLE_KEY` com os valores do projeto Supabase. O `.env` não deve ser
-   enviado ao Git.
-2. No Supabase, abra **SQL Editor**, execute [`supabase/setup.sql`](./supabase/setup.sql) e
+O projeto já vem com a URL e a chave publicável do Supabase configuradas, portanto clones não
+precisam criar um `.env` para executar a interface. Para usar outro projeto Supabase, copie
+`.env.example` para `.env` e substitua os dois valores; o `.env` não deve ser enviado ao Git.
+
+1. No Supabase, abra **SQL Editor**, execute [`supabase/setup.sql`](./supabase/setup.sql) e
    importe os registros reais de usuários, espécies, raças, pets e fotos. O script cria tabelas
    que estiverem faltando, ativa RLS e cria a view pública usada pelo catálogo.
-3. Reinicie `npm run dev` depois de alterar o `.env`.
+2. Reinicie `npm run dev` depois de alterar o `.env`.
 
 O catálogo ficará vazio até haver registros de pets relacionados a usuários, espécies e fotos.
 As políticas de escrita de pets exigem que o usuário esteja autenticado pelo Supabase e vinculado
